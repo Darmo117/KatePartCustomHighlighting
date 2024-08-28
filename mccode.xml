@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Highlighting for a MC Code, a custom scripting language for Minecraft. See <https://github.com/Darmo117/MC_Code_Fabric> -->
+<!-- Highlighting for MC Code, a custom scripting language for Minecraft. See <https://github.com/Darmo117/MC_Code_Fabric> -->
 <language name="MC Code" section="Scripts" extensions="*.mccode" version="1" kateversion="2.4">
   <highlighting>
     <list name="keywords">
