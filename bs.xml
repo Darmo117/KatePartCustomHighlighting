@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ Highlighting for the BS language created by Mark Rendle, as defined in his talk at NDC Oslo 2021.
+ See <https://www.youtube.com/watch?v=vcFBwt1nu2U> for the full talk.
+ One difference with these specifications is that double quotes ('' '', "" "" and «« »»)
+ are replaced with triple quotes (''' ''', """ """ and ««« »»») for technical reasons.
+-->
+<language name="BS" section="Scripts" extensions="*.bs" version="1" kateversion="2.4">
+  <highlighting>
+    <list name="keywords">
+      <item>class</item>
+      <item>public</item>
+      <item>private</item>
+      <item>protected</item>
+      <item>function</item>
+      <item>__construct</item>
+      <item>unless</item>
+      <item>else</item>
+      <item>echo</item>
+      <item>isProbablyA</item>
+      <item>isProbablyAn</item>
+      <item>areProbably</item>
+      <item>Delete</item>
+      <item>Dim</item>
+      <item>As</item>
+      <item>Let</item>
+      <item>goto</item>
+      <item>do</item>
+      <item>and</item>
+      <item>new</item>
+      <item>extends</item>
+      <item>HALT_AND_CATCH_FIRE</item>
+    </list>
+    <list name="builtins">
+      <item>BS</item>
+      <item>String</item>
+      <item>Strings</item>
+      <item>Integer</item>
+      <item>Integers</item>
+      <item>Float</item>
+      <item>Floats</item>
+      <item>DateTime</item>
+      <item>DateTimes</item>
+      <item>len</item>
+    </list>
+    <list name="literals">
+      <item>null</item>
+      <item>undefined</item>
+      <item>true</item>
+      <item>false</item>
+      <item>🥧</item>
+    </list>
+    <contexts>
+      <context lineEndContext="#pop" name="root">
+        <RegExpr attribute="Operator" context="#stay" String="[+*/%,&lt;&gt;;;():!=|&amp;^~-]"/>
+        <RegExpr attribute="Macro" context="macro" String="#define " firstNonSpace="true"/>
+        <keyword attribute="Keyword" context="#stay" String="keywords"/>
+        <!-- Literals -->
+        <keyword attribute="Literal" context="#stay" String="literals"/>
+        <RegExpr attribute="Float" context="#stay" String="\b(\d(_?\d)*\.(\d(_?\d)*)?|\.?\d(_?\d)*)([eE]-?\d(_?\d)*)?"/>
+        <RegExpr attribute="Integer" context="#stay" String="\b\d(_?\d)*"/>
+        <!-- Strings -->
+        <StringDetect attribute="ANSI String" context="ansi_string" String="'''"/>
+        <DetectChar attribute="ASCII String" context="ascii_string" char="'"/>
+        <StringDetect attribute="EBCDIC String" context="ebcdic_string" String="&quot;&quot;&quot;"/>
+        <DetectChar attribute="DBCS String" context="dbcs_string" char="&quot;"/>
+        <StringDetect attribute="Interpolated UTF-256 String" context="interp_utf256_string" String="«««"/>
+        <DetectChar attribute="UTF-256 String" context="utf256_string" char="«"/>
+        <!-- Identifiers -->
+        <keyword attribute="Builtins" context="#stay" String="builtins"/>
+        <RegExpr attribute="Variable" context="#stay" String="€[a-zA-Z_]\w*"/>
+        <DetectIdentifier attribute="Identifier"/>
+        <!-- Comments -->
+        <RegExpr attribute="Comment" context="multiline_comment" String="^\t $"/>
+        <RegExpr attribute="Comment" context="comment" String="^ (  )*(?=\b)"/><!-- Odd number of spaces -->
+        <RegExpr attribute="Error" context="#stay" String="[^ \n\r\t]"/>
+      </context>
+      <context attribute="Macro" lineEndContext="#pop" name="macro">
+        <DetectChar attribute="Regex" context="regex" char="/"/>
+      </context>
+      <context attribute="Regex" lineEndContext="#pop" name="regex">
+      </context>
+      <context attribute="Comment" lineEndContext="#pop" name="comment">
+        <keyword attribute="Comment Task" context="#stay" String="comment_tasks"/>
+      </context>
+      <context attribute="Comment" lineEndContext="#stay" name="multiline_comment">
+        <keyword attribute="Comment Task" context="#stay" String="comment_tasks"/>
+        <RegExpr attribute="Comment" context="#pop" String="^ \t$"/>
+      </context>
+      <context attribute="ASCII String" lineEndContext="#pop" name="ascii_string">
+        <RegExpr attribute="Escape" String="\\['\\]" context="#stay"/>
+        <RegExpr attribute="Error" String="\\[^'\\]" context="#stay"/>
+        <DetectChar attribute="ASCII String" context="#pop" char="'"/>
+      </context>
+      <context attribute="ANSI String" lineEndContext="#pop" name="ansi_string">
+        <RegExpr attribute="Escape" String="\\['\\]" context="#stay"/>
+        <RegExpr attribute="Error" String="\\[^'\\]" context="#stay"/>
+        <StringDetect attribute="ANSI String" context="#pop" String="'''"/>
+      </context>
+      <context attribute="DBCS String" lineEndContext="#pop" name="dbcs_string">
+        <RegExpr attribute="Escape" String="\\[&quot;\\]" context="#stay"/>
+        <RegExpr attribute="Error" String="\\[^&quot;\\]" context="#stay"/>
+        <DetectChar attribute="DBCS String" context="#pop" char="&quot;"/>
+      </context>
+      <context attribute="EBCDIC String" lineEndContext="#pop" name="ebcdic_string">
+        <RegExpr attribute="Escape" String="\\[&quot;\\]" context="#stay"/>
+        <RegExpr attribute="Error" String="\\[^&quot;\\]" context="#stay"/>
+        <StringDetect attribute="EBCDIC String" context="#pop" String="&quot;&quot;&quot;"/>
+      </context>
+      <context attribute="UTF-256 String" lineEndContext="#pop" name="utf256_string">
+        <RegExpr attribute="Escape" String="\\[\\]" context="#stay"/>
+        <RegExpr attribute="Error" String="\\[^\\]" context="#stay"/>
+        <DetectChar attribute="UTF-256 String" context="#pop" char="»"/>
+      </context>
+      <context attribute="Interpolated UTF-256 String" lineEndContext="#pop" name="interp_utf256_string">
+        <RegExpr attribute="Escape" String="\\[»\\]" context="#stay"/>
+        <RegExpr attribute="Error" String="\\[^»\\]" context="#stay"/>
+        <StringDetect attribute="Interpolated UTF-256 String" context="#pop" String="»»»"/>
+        <StringDetect attribute="Interpolated Value" context="interp_value" String="${"/>
+      </context>
+      <context attribute="Interpolated Value" lineEndContext="#pop" name="interp_value">
+        <RegExpr attribute="Operator" context="#stay" String="[+*/%,&lt;&gt;;;():!=-]"/>
+        <keyword attribute="Literal" context="#stay" String="literals"/>
+        <!-- Literals -->
+        <keyword attribute="Literal" context="#stay" String="literals"/>
+        <RegExpr attribute="Float" context="#stay" String="\b(\d(_?\d)*\.(\d(_?\d)*)?|\.?\d(_?\d)*)([eE]-?\d(_?\d)*)?"/>
+        <RegExpr attribute="Integer" context="#stay" String="\b\d(_?\d)*"/>
+        <!-- Strings -->
+        <StringDetect attribute="ANSI String" context="ansi_string" String="'''"/>
+        <DetectChar attribute="ASCII String" context="ascii_string" char="'"/>
+        <StringDetect attribute="EBCDIC String" context="ebcdic_string" String="&quot;&quot;&quot;"/>
+        <DetectChar attribute="DBCS String" context="dbcs_string" char="&quot;"/>
+        <DetectChar attribute="UTF-256 String" context="utf256_string" char="«"/>
+        <!-- Identifiers -->
+        <keyword attribute="Builtins" context="#stay" String="builtins"/>
+        <RegExpr attribute="Variable" context="#stay" String="€[a-zA-Z_]\w*"/>
+        <DetectIdentifier attribute="Identifier"/>
+
+        <DetectChar attribute="Interpolated Value" context="#pop" char="}"/>
+      </context>
+    </contexts>
+    <itemDatas>
+      <itemData name="Keyword" defStyleNum="dsKeyword"/>
+      <itemData name="Operator" defStyleNum="dsOperator"/>
+      <itemData name="Identifier" defStyleNum="dsFunction"/>
+      <itemData name="Variable" defStyleNum="dsVariable"/>
+      <itemData name="Literal" defStyleNum="dsConstant"/>
+      <itemData name="Integer" defStyleNum="dsDecVal"/>
+      <itemData name="Float" defStyleNum="dsFloat"/>
+      <itemData name="ASCII String" defStyleNum="dsString"/>
+      <itemData name="ANSI String" defStyleNum="dsString"/>
+      <itemData name="DBCS String" defStyleNum="dsString"/>
+      <itemData name="EBCDIC String" defStyleNum="dsString"/>
+      <itemData name="UTF-256 String" defStyleNum="dsString"/>
+      <itemData name="Interpolated UTF-256 String" defStyleNum="dsString"/>
+      <itemData name="Interpolated Value" defStyleNum="dsSpecialString"/>
+      <itemData name="Escape" defStyleNum="dsSpecialChar"/>
+      <itemData name="Builtins" defStyleNum="dsBuiltIn"/>
+      <itemData name="Comment" defStyleNum="dsComment"/>
+      <itemData name="Comment Task" defStyleNum="dsAlert"/>
+      <itemData name="Error" defStyleNum="dsError"/>
+      <itemData name="Macro" defStyleNum="dsPreprocessor"/>
+      <itemData name="Regex" defStyleNum="dsSpecialString"/>
+    </itemDatas>
+  </highlighting>
+</language>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Highlighting for Minecraft’s SNBT format. -->
+<language name="SNBT" section="Markup" extensions="*.snbt" version="1" kateversion="2.4">
+  <highlighting>
+    <list name="literals">
+      <item>true</item>
+      <item>false</item>
+    </list>
+    <contexts>
+      <context lineEndContext="#stay" name="root">
+        <DetectChar attribute="Braces" context="object" char="{"/>
+        <DetectChar attribute="Comment" context="comment" char="#"/>
+        <RegExpr attribute="Error" context="#stay" String="[^ \n\r\t]"/>
+      </context>
+
+      <context lineEndContext="#stay" name="object">
+        <RegExpr context="unquoted_key" String="[a-zA-Z\d_.+-]" lookAhead="true"/>
+        <DetectChar attribute="Key" context="double_key" char="&quot;"/>
+        <DetectChar attribute="Key" context="simple_key" char="'"/>
+        <DetectChar attribute="Colon" context="object_value" char=":"/>
+        <DetectChar attribute="Braces" context="#pop" char="}"/>
+        <DetectChar attribute="Comment" context="comment" char="#"/>
+        <RegExpr attribute="Error" context="#stay" String="[^ \n\r\t]"/>
+      </context>
+
+      <context attribute="Key" lineEndContext="#stay" name="double_key">
+        <IncludeRules context="quoted_double_string" includeAttrib="false"/>
+        <DetectChar attribute="Key" context="#pop" char="&quot;"/>
+      </context>
+      <context attribute="Key" lineEndContext="#stay" name="simple_key">
+        <IncludeRules context="quoted_simple_string" includeAttrib="false"/>
+        <DetectChar attribute="Key" context="#pop" char="'"/>
+      </context>
+      <context attribute="Key" lineEndContext="#stay" name="unquoted_key">
+        <RegExpr context="#pop" String="\s*:" lookAhead="true"/>
+        <RegExpr attribute="Error" String="[^a-zA-Z\d_.+-]" context="#pop"/>
+      </context>
+
+      <context attribute="String" lineEndContext="#pop" name="double_string">
+        <IncludeRules context="quoted_double_string" includeAttrib="false"/>
+        <DetectChar attribute="String" context="#pop" char="&quot;"/>
+      </context>
+      <context attribute="String" lineEndContext="#pop" name="simple_string">
+        <IncludeRules context="quoted_simple_string" includeAttrib="false"/>
+        <DetectChar attribute="String" context="#pop" char="'"/>
+      </context>
+
+      <context lineEndContext="#pop" name="quoted_double_string">
+        <RegExpr attribute="Escape" String="\\[&quot;\\]" context="#stay"/>
+        <RegExpr attribute="Error" String="\\[^&quot;\\]" context="#stay"/>
+      </context>
+      <context lineEndContext="#pop" name="quoted_simple_string">
+        <RegExpr attribute="Escape" String="\\['\\]" context="#stay"/>
+        <RegExpr attribute="Error" String="\\[^'\\]" context="#stay"/>
+      </context>
+
+      <context attribute="String" lineEndContext="#pop" name="object_unquoted_string">
+        <DetectChar context="#pop" char="}" lookAhead="true"/>
+        <IncludeRules context="unquoted_string" includeAttrib="false"/>
+      </context>
+      <context attribute="String" lineEndContext="#pop" name="list_unquoted_string">
+        <DetectChar context="#pop" char="]" lookAhead="true"/>
+        <IncludeRules context="unquoted_string" includeAttrib="false"/>
+      </context>
+      <context attribute="String" lineEndContext="#pop" name="unquoted_string">
+        <RegExpr context="#pop" String="\s*," lookAhead="true"/>
+        <RegExpr context="comment" String="\s*#" lookAhead="true"/>
+        <RegExpr attribute="Error" String="[^a-zA-Z\d_.+-]" context="#pop"/>
+      </context>
+
+      <context lineEndContext="#pop" name="object_value">
+        <IncludeRules context="value" includeAttrib="true"/>
+        <RegExpr context="object_unquoted_string" String="[a-zA-Z\d_.+-]" lookAhead="true"/>
+        <DetectChar attribute="Comma" context="#pop" char=","/>
+        <DetectChar attribute="Braces" context="#pop#pop" char="}"/>
+        <RegExpr attribute="Error" context="#stay" String="[^ \n\r\t]"/>
+      </context>
+      <context lineEndContext="#stay" name="list">
+        <IncludeRules context="value" includeAttrib="true"/>
+        <RegExpr context="list_unquoted_string" String="[a-zA-Z\d_.+-]" lookAhead="true"/>
+        <DetectChar attribute="Comma" context="#stay" char=","/>
+        <DetectChar attribute="Brackets" context="#pop" char="]"/>
+        <RegExpr attribute="Error" context="#stay" String="[^ \n\r\t]"/>
+      </context>
+      <context lineEndContext="#stay" name="value">
+        <RegExpr attribute="Float" context="#stay" String="-?\d+(\.\d+)?[fF]"/>
+        <RegExpr attribute="Double" context="#stay" String="-?\d+(\.\d+[dD]?|[dD])"/>
+        <RegExpr attribute="Byte" context="#stay" String="-?\d+[bB]"/>
+        <RegExpr attribute="Short" context="#stay" String="-?\d+[sS]"/>
+        <RegExpr attribute="Long" context="#stay" String="-?\d+[lL]"/>
+        <RegExpr attribute="Integer" context="#stay" String="-?\d+"/>
+        <keyword attribute="Literal" context="#stay" String="literals"/>
+        <DetectChar attribute="String" context="double_string" char="&quot;"/>
+        <DetectChar attribute="String" context="simple_string" char="'"/>
+        <DetectChar attribute="Braces" context="object" char="{"/>
+        <RegExpr attribute="Brackets" context="byte_array" String="\[B;"/>
+        <RegExpr attribute="Brackets" context="int_array" String="\[I;"/>
+        <RegExpr attribute="Brackets" context="long_array" String="\[L;"/>
+        <DetectChar attribute="Brackets" context="list" char="["/>
+        <DetectChar attribute="Comment" context="comment" char="#"/>
+      </context>
+
+      <context lineEndContext="#stay" name="byte_array">
+        <RegExpr attribute="Byte" context="#stay" String="-?\d+[bB]"/>
+        <DetectChar attribute="Comma" context="#stay" char=","/>
+        <DetectChar attribute="Brackets" context="#pop" char="]"/>
+        <DetectChar attribute="Comment" context="comment" char="#"/>
+        <RegExpr attribute="Error" context="#stay" String="[^ \n\r\t]"/>
+      </context>
+      <context lineEndContext="#stay" name="int_array">
+        <RegExpr attribute="Integer" context="#stay" String="-?\d+"/>
+        <DetectChar attribute="Comma" context="#stay" char=","/>
+        <DetectChar attribute="Brackets" context="#pop" char="]"/>
+        <DetectChar attribute="Comment" context="comment" char="#"/>
+        <RegExpr attribute="Error" context="#stay" String="[^ \n\r\t]"/>
+      </context>
+      <context lineEndContext="#stay" name="long_array">
+        <RegExpr attribute="Long" context="#stay" String="-?\d+[lL]"/>
+        <DetectChar attribute="Comma" context="#stay" char=","/>
+        <DetectChar attribute="Brackets" context="#pop" char="]"/>
+        <DetectChar attribute="Comment" context="comment" char="#"/>
+        <RegExpr attribute="Error" context="#stay" String="[^ \n\r\t]"/>
+      </context>
+
+      <context attribute="Comment" lineEndContext="#pop" name="comment">
+        <keyword attribute="Comment Task" context="#stay" String="comment_tasks"/>
+      </context>
+    </contexts>
+    <itemDatas>
+      <itemData name="Braces" defStyleNum="dsOperator"/>
+      <itemData name="Brackets" defStyleNum="dsOperator"/>
+      <itemData name="Comma" defStyleNum="dsOperator"/>
+      <itemData name="Colon" defStyleNum="dsOperator"/>
+      <itemData name="Literal" defStyleNum="dsConstant"/>
+      <itemData name="Integer" defStyleNum="dsDecVal"/>
+      <itemData name="Byte" defStyleNum="dsDecVal"/>
+      <itemData name="Short" defStyleNum="dsDecVal"/>
+      <itemData name="Long" defStyleNum="dsDecVal"/>
+      <itemData name="Float" defStyleNum="dsFloat"/>
+      <itemData name="Double" defStyleNum="dsFloat"/>
+      <itemData name="String" defStyleNum="dsString"/>
+      <itemData name="Key" defStyleNum="dsKeyword"/>
+      <itemData name="Comment" defStyleNum="dsComment"/>
+      <itemData name="Escape" defStyleNum="dsSpecialChar"/>
+      <itemData name="Error" defStyleNum="dsError"/>
+    </itemDatas>
+  </highlighting>
+  <general>
+    <comments>
+      <comment name="singleLine" start="#"/>
+    </comments>
+    <keywords casesensitive="1"/>
+  </general>
+</language>

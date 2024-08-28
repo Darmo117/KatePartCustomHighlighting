@@ -1,0 +1,39 @@
+# Comment
+{ # Comment in object
+  no_quotes.test-1+2: "value",
+  "quoted key with escapes \"\\": "test \"\\'",
+  simple_quotes: 'aa\'aaaaa\\aaa"' 1,
+  space_after_key : "",
+  "space_after_key_2" : "", # Comment after value
+  no_comma_at_line_end: ""
+  unquoted_string_same_line: no_quotes.test-1+2, test: "yo"
+  unquoted_string_comma: no_quotes.test-1+2,
+  unquoted_string_space_and_comma: no_quotes.test-1+2 ,
+  unquoted_string_eol: no_quotes.test-1+2
+  Test_booleans: [true, false],
+  Test_bytes: [1b, 2B, -1b, -2B],
+  Test_shorts: [1s, 2S, -1s, -2S],
+  Test_integers: [1, 2, -1, -2],
+  Test_longs: [1l, 2L, -1l, -2L],
+  Test_floats: [1f, 2F, 1.0f, 2.0F, -1f, -2F, -1.0f, -2.0F],
+  Test_doubles: [1d, 2D, 1.0d, 2.0D, 1.0, 2.0, -1d, -2D, -1.0d, -2.0D, -1.0, -2.0],
+  list: [ # Comment in list
+    "a" , b-c-d, "e"
+    f.g
+    h+i , # Comment in list
+    jk],
+  byte_array: [B; 1b, 2b],
+  int_array: [I; 1, 2],
+  long_array: [L; 1L, 2L],
+  byte_array_2: [B; 1b, 2b # Comment in byte array
+    3b, 4b
+  ],
+  int_array_2: [I; 1, 2 # Comment in int array
+    3, 4
+  ],
+  long_array_2: [L; 1L, 2L # Comment in long array
+    3L, 4L
+  ],
+  object: {key.1: 0, key.2: ab},
+  test: aa
+}

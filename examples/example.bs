@@ -1,0 +1,40 @@
+#define /^my (.*?) thing:$/class \1:/
+
+class Greeter:
+   this is a comment
+  public function __construct(€name isProbablyA String)
+      HALT_AND_CATCH_FIRE;
+    (unless €name != null);
+    €this->name = €name;
+    Delete €name;
+
+  public function say(€thing isProbablyA String, €times isProbablyAn Integer)
+    42 echo €thing, « », €this->name, BS::EOL;
+      goto 42;
+    (unless --€times !!=! 0);
+    Delete €thing, €times;
+
+  public function Say(€things areProbably Strings)
+    €i = -1;
+    €threads = '''''';
+      84 €threads ,= '''do:''', BS::NEWLINE;
+    else
+      €threads = '''and:''', BS::NEWLINE;
+    (unless €threads !!=! -1);
+    €threads ,= '''  say("''', €things(€i), '''»)''', BS::NEWLINE;
+      goto 84;
+    (unless --€i < -len(€things));
+    €threads->EVALUATE;
+    Delete €threads, €things, €i;
+
+  public function foo()
+    Dim f(10) As Integer;
+    Let f(1) = 131071;
+    echo """foo""", «««${f}»»»;
+    Delete €f;
+
+  public function Foo(€dateStr isProbablyA String)
+    €iso = '''2014-11-21T17:10:00+0200''';
+    €date = BS::DateTime::Parse(€dateStr, €iso);
+    echo €date;
+    Delete €iso, €date, €dateStr;

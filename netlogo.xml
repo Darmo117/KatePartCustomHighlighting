@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Highlighting for NetLogo’s scripting language. -->
+<language name="NetLogo" section="Scientific" extensions="*.nlogo" version="1" kateversion="2.4">
+  <highlighting>
+    <list name="functions">
+      <!-- Turtle-related -->
+      <item>back</item>
+      <item>bk</item>
+      <item>can-move?</item>
+      <item>clear-turtles</item>
+      <item>ct</item>
+      <item>create-ordered-turtles</item>
+      <item>cro</item>
+      <item>create-turtles</item>
+      <item>crt</item>
+      <item>die</item>
+      <item>distance</item>
+      <item>distancexy</item>
+      <item>downhill</item>
+      <item>downhill4</item>
+      <item>dx</item>
+      <item>dy</item>
+      <item>face</item>
+      <item>facexy</item>
+      <item>forward</item>
+      <item>fd</item>
+      <item>hatch</item>
+      <item>hide-turtle</item>
+      <item>ht</item>
+      <item>home</item>
+      <item>inspect</item>
+      <item>is-turtle?</item>
+      <item>jump</item>
+      <item>layout-circle</item>
+      <item>left</item>
+      <item>lt</item>
+      <item>move-to</item>
+      <item>no-turtles</item>
+      <item>of</item>
+      <item>other</item>
+      <item>patch-ahead</item>
+      <item>patch-at-heading-and-distance</item>
+      <item>patch-at</item>
+      <item>patch-here</item>
+      <item>patch-left-and-ahead</item>
+      <item>patch-right-and-ahead</item>
+      <item>pen-down</item>
+      <item>pd</item>
+      <item>pen-erase</item>
+      <item>pe</item>
+      <item>pen-up</item>
+      <item>pu</item>
+      <item>random-xcor</item>
+      <item>random-ycor</item>
+      <item>right</item>
+      <item>rt</item>
+      <item>set-default-shape</item>
+      <item>__set-line-thickness</item>
+      <item>setxy</item>
+      <item>shapes</item>
+      <item>show-turtle</item>
+      <item>st</item>
+      <item>sprout</item>
+      <item>stamp</item>
+      <item>stamp-erase</item>
+      <item>stop-inspecting</item>
+      <item>subject</item>
+      <item>subtract-headings</item>
+      <item>tie</item>
+      <item>towards</item>
+      <item>towardsxy</item>
+      <item>turtle</item>
+      <item>turtle-set</item>
+      <item>turtles</item>
+      <item>turtles-at</item>
+      <item>turtles-here</item>
+      <item>turtles-own</item>
+      <item>untie</item>
+      <item>uphill</item>
+      <item>uphill4</item>
+      <!-- Patch-related -->
+      <item>clear-patches</item>
+      <item>cp</item>
+      <item>diffuse</item>
+      <item>diffuse4</item>
+      <item>import-pcolors</item>
+      <item>import-pcolors-rgb</item>
+      <item>is-patch?</item>
+      <item>neighbors</item>
+      <item>neighbors4</item>
+      <item>no-patches</item>
+      <item>patch</item>
+      <item>patch-set</item>
+      <item>patches-own</item>
+      <item>patches</item>
+      <item>random-pxcor</item>
+      <item>random-pycor</item>
+      <!-- Link-related -->
+      <item>both-ends</item>
+      <item>clear-links</item>
+      <item>create-link-from</item>
+      <item>create-links-from</item>
+      <item>create-link-to</item>
+      <item>create-links-to</item>
+      <item>create-link-with</item>
+      <item>create-links-with</item>
+      <item>directed-link-breed</item>
+      <item>hide-link</item>
+      <item>in-link-neighbor?</item>
+      <item>in-link-neighbors</item>
+      <item>in-link-from</item>
+      <item>is-directed-link?</item>
+      <item>is-link?</item>
+      <item>is-link-set?</item>
+      <item>is-undirected-link?</item>
+      <item>layout-radial</item>
+      <item>layout-spring</item>
+      <item>layout-tutte</item>
+      <item>link-heading</item>
+      <item>link-length</item>
+      <item>link-neighbor?</item>
+      <item>link</item>
+      <item>links</item>
+      <item>links-own</item>
+      <item>link-neighbors</item>
+      <item>link-with</item>
+      <item>my-in-links</item>
+      <item>my-links</item>
+      <item>my-out-links</item>
+      <item>no-links</item>
+      <item>other-end</item>
+      <item>out-link-neighbor?</item>
+      <item>out-link-neighbors</item>
+      <item>out-link-to</item>
+      <item>show-link</item>
+      <!-- Agentset-related -->
+      <item>all?</item>
+      <item>any?</item>
+      <item>at-points</item>
+      <item>count</item>
+      <item>in-cone</item>
+      <item>in-radius</item>
+      <item>is-agent?</item>
+      <item>is-agentset?</item>
+      <item>is-patch-set?</item>
+      <item>is-turtle-set?</item>
+      <item>link-set</item>
+      <item>max-n-of</item>
+      <item>max-one-of</item>
+      <item>member?</item>
+      <item>min-n-of</item>
+      <item>min-one-of</item>
+      <item>n-of</item>
+      <item>one-of</item>
+      <item>sort</item>
+      <item>sort-by</item>
+      <item>sort-on</item>
+      <item>up-to-n-of</item>
+      <item>with</item>
+      <item>with-max</item>
+      <item>with-min</item>
+      <!-- Color-related -->
+      <item>approximate-hsb</item>
+      <item>approximate-rgb</item>
+      <item>base-colors</item>
+      <item>extract-hsb</item>
+      <item>hsb</item>
+      <item>rgb</item>
+      <item>scale-color</item>
+      <item>shade-of?</item>
+      <item>wrap-color</item>
+      <!-- Anonymous procedures -->
+      <item>filter</item>
+      <item>is-anonymous-command?</item>
+      <item>is-anonymous-reporter?</item>
+      <item>map</item>
+      <item>n-values</item>
+      <item>reduce</item>
+      <!-- World-related -->
+      <item>clear-all</item>
+      <item>ca</item>
+      <item>clear-drawing</item>
+      <item>cd</item>
+      <item>clear-globals</item>
+      <item>clear-ticks</item>
+      <item>display</item>
+      <item>import-drawing</item>
+      <item>no-display</item>
+      <item>max-pxcor</item>
+      <item>max-pycor</item>
+      <item>min-pxcor</item>
+      <item>min-pycor</item>
+      <item>patch-size</item>
+      <item>reset-ticks</item>
+      <item>resize-world</item>
+      <item>set-patch-size</item>
+      <item>stop-inspecting-dead-agents</item>
+      <item>tick</item>
+      <item>tick-advance</item>
+      <item>world-width</item>
+      <item>world-height</item>
+      <!-- Perspective-related -->
+      <item>follow</item>
+      <item>follow-me</item>
+      <item>reset-perspective</item>
+      <item>rp</item>
+      <item>ride</item>
+      <item>ride-me</item>
+      <item>watch</item>
+      <item>watch-me</item>
+      <!-- Hubnet-related -->
+      <item>hubnet-broadcast</item>
+      <item>hubnet-broadcast-clear-output</item>
+      <item>hubnet-broadcast-message</item>
+      <item>hubnet-clear-override</item>
+      <item>hubnet-clear-overrides</item>
+      <item>hubnet-clients-list</item>
+      <item>hubnet-enter-message?</item>
+      <item>hubnet-exit-message?</item>
+      <item>hubnet-kick-all-clients</item>
+      <item>hubnet-kick-client</item>
+      <item>hubnet-fetch-message</item>
+      <item>hubnet-message</item>
+      <item>hubnet-message-source</item>
+      <item>hubnet-message-tag</item>
+      <item>hubnet-message-waiting?</item>
+      <item>hubnet-reset</item>
+      <item>hubnet-reset-perspective</item>
+      <item>hubnet-send</item>
+      <item>hubnet-send-clear-output</item>
+      <item>hubnet-send-follow</item>
+      <item>hubnet-send-message</item>
+      <item>hubnet-send-override</item>
+      <item>hubnet-send-watch</item>
+      <!-- IO-related -->
+      <item>beep</item>
+      <item>clear-output</item>
+      <item>date-and-time</item>
+      <item>export-view</item>
+      <item>export-interface</item>
+      <item>export-output</item>
+      <item>export-plot</item>
+      <item>export-all-plots</item>
+      <item>export-world</item>
+      <item>import-world</item>
+      <item>mouse-down?</item>
+      <item>mouse-inside?</item>
+      <item>mouse-xcor</item>
+      <item>mouse-ycor</item>
+      <item>output-print</item>
+      <item>output-show</item>
+      <item>output-type</item>
+      <item>output-write</item>
+      <item>print</item>
+      <item>read-from-string</item>
+      <item>reset-timer</item>
+      <item>set-current-directory</item>
+      <item>show</item>
+      <item>timer</item>
+      <item>type</item>
+      <item>user-directory</item>
+      <item>user-file</item>
+      <item>user-new-file</item>
+      <item>user-input</item>
+      <item>user-message</item>
+      <item>user-one-of</item>
+      <item>user-yes-or-no?</item>
+      <item>write</item>
+      <!-- File-related -->
+      <item>file-at-end?</item>
+      <item>file-close</item>
+      <item>file-close-all</item>
+      <item>file-delete</item>
+      <item>file-exists?</item>
+      <item>file-flush</item>
+      <item>file-open</item>
+      <item>file-print</item>
+      <item>file-read</item>
+      <item>file-read-characters</item>
+      <item>file-read-line</item>
+      <item>file-show</item>
+      <item>file-type</item>
+      <item>file-write</item>
+      <!-- List-related -->
+      <item>but-first</item>
+      <item>but-last</item>
+      <item>empty?</item>
+      <item>first</item>
+      <item>fput</item>
+      <item>histogram</item>
+      <item>insert-item</item>
+      <item>is-list?</item>
+      <item>item</item>
+      <item>last</item>
+      <item>length</item>
+      <item>list</item>
+      <item>lput</item>
+      <item>max</item>
+      <item>min</item>
+      <item>modes</item>
+      <item>position</item>
+      <item>range</item>
+      <item>reduce</item>
+      <item>remove</item>
+      <item>remove-duplicates</item>
+      <item>remove-item</item>
+      <item>replace-item</item>
+      <item>reverse</item>
+      <item>sentence</item>
+      <item>shuffle</item>
+      <item>sublist</item>
+      <!-- String-related -->
+      <item>is-string?</item>
+      <item>substring</item>
+      <item>word</item>
+      <!-- Math-related -->
+      <item>abs</item>
+      <item>acos</item>
+      <item>asin</item>
+      <item>atan</item>
+      <item>ceiling</item>
+      <item>cos</item>
+      <item>exp</item>
+      <item>floor</item>
+      <item>int</item>
+      <item>is-number?</item>
+      <item>ln</item>
+      <item>log</item>
+      <item>mean</item>
+      <item>median</item>
+      <item>new-seed</item>
+      <item>precision</item>
+      <item>random</item>
+      <item>random-exponential</item>
+      <item>random-float</item>
+      <item>random-gamma</item>
+      <item>random-normal</item>
+      <item>random-poisson</item>
+      <item>random-seed</item>
+      <item>remainder</item>
+      <item>round</item>
+      <item>sin</item>
+      <item>sqrt</item>
+      <item>standard-deviation</item>
+      <item>subtract-headings</item>
+      <item>sum</item>
+      <item>tan</item>
+      <item>variance</item>
+      <!-- Plotting -->
+      <item>autoplot?</item>
+      <item>auto-plot-off</item>
+      <item>auto-plot-on</item>
+      <item>clear-all-plots</item>
+      <item>clear-plot</item>
+      <item>create-temporary-plot-pen</item>
+      <item>export-plot</item>
+      <item>export-all-plots</item>
+      <item>plot</item>
+      <item>plot-name</item>
+      <item>plot-pen-exists?</item>
+      <item>plot-pen-down</item>
+      <item>plot-pen-reset</item>
+      <item>plot-pen-up</item>
+      <item>plot-x-max</item>
+      <item>plot-x-min</item>
+      <item>plot-y-max</item>
+      <item>plot-y-min</item>
+      <item>plotxy</item>
+      <item>set-current-plot</item>
+      <item>set-current-plot-pen</item>
+      <item>set-histogram-num-bars</item>
+      <item>set-plot-background-color</item>
+      <item>set-plot-pen-color</item>
+      <item>set-plot-pen-interval</item>
+      <item>set-plot-pen-mode</item>
+      <item>set-plot-x-range</item>
+      <item>set-plot-y-range</item>
+      <item>setup-plots</item>
+      <item>update-plots</item>
+      <!-- BehaviorSpace -->
+      <item>behaviorspace-experiment-name</item>
+      <item>behaviorspace-run-number</item>
+      <!-- System-related -->
+      <item>netlogo-version</item>
+      <item>netlogo-web?</item>
+    </list>
+    <list name="builtin-variables">
+      <item>breed</item>
+      <item>color</item>
+      <item>heading</item>
+      <item>hidden?</item>
+      <item>label</item>
+      <item>label-color</item>
+      <item>pend-mode</item>
+      <item>pen-size</item>
+      <item>shape</item>
+      <item>size</item>
+      <item>who</item>
+      <item>xcor</item>
+      <item>ycor</item>
+      <item>pcolor</item>
+      <item>plabel</item>
+      <item>plabel-color</item>
+      <item>pxcor</item>
+      <item>pycor</item>
+      <item>end1</item>
+      <item>end2</item>
+      <item>thickness</item>
+      <item>tie-mode</item>
+      <item>nobody</item>
+      <item>myself</item>
+      <item>self</item>
+      <item>ticks</item>
+    </list>
+    <list name="constants">
+      <item>e</item>
+      <item>pi</item>
+      <item>black</item>
+      <item>gray</item>
+      <item>white</item>
+      <item>red</item>
+      <item>orange</item>
+      <item>brown</item>
+      <item>yellow</item>
+      <item>green</item>
+      <item>lime</item>
+      <item>turquoise</item>
+      <item>cyan</item>
+      <item>sky</item>
+      <item>blue</item>
+      <item>violet</item>
+      <item>magenta</item>
+      <item>pink</item>
+    </list>
+    <list name="literals">
+      <item>false</item>
+      <item>true</item>
+    </list>
+    <list name="control-flow">
+      <item>and</item>
+      <item>ask-concurrent</item>
+      <item>ask</item>
+      <item>carefully</item>
+      <item>error-message</item>
+      <item>error</item>
+      <item>every</item>
+      <item>if</item>
+      <item>ifelse-value</item>
+      <item>ifelse</item>
+      <item>let</item>
+      <item>loop</item>
+      <item>not</item>
+      <item>or</item>
+      <item>repeat</item>
+      <item>report</item>
+      <item>run</item>
+      <item>runresult</item>
+      <item>set</item>
+      <item>stop</item>
+      <item>startup</item>
+      <item>wait</item>
+      <item>while</item>
+      <item>with-local-randomness</item>
+      <item>without-interruption</item>
+      <item>xor</item>
+      <item>foreach</item>
+    </list>
+    <list name="keywords">
+      <item>breed</item><!-- only at line start -->
+      <item>directed-link-breed</item>
+      <item>end</item>
+      <item>extensions</item>
+      <item>globals</item>
+      <item>__includes</item>
+      <item>to-report</item>
+      <item>to</item>
+      <item>undirected-link-breed</item>
+    </list>
+    <list name="comment_tasks">
+      <item>TODO</item>
+      <item>FIXME</item>
+      <item>TEST</item>
+      <item>DEBUG</item>
+      <item>XXXX</item>
+    </list>
+    <contexts>
+      <context attribute="Normal Text" lineEndContext="#pop" name="Normal Text">
+        <RegExpr attribute="Float" context="#stay" String="[-+]?(\d(_?\d)*\.(\d(_?\d)*)?|\.?\d(_?\d)*)([eE]-?\d(_?\d)*)?"/>
+        <RegExpr attribute="Integer" context="#stay" String="[-+]?\d(_?\d)*"/>
+        <keyword attribute="Function" context="#stay" String="functions"/>
+        <keyword attribute="Built-in Variable" context="#stay" String="builtin-variables"/>
+        <keyword attribute="Constant" context="#stay" String="constants"/>
+        <keyword attribute="Flow Control" context="#stay" String="control-flow"/>
+        <keyword attribute="Keyword" context="#stay" String="keywords"/>
+        <keyword attribute="Literal" context="#stay" String="literals"/>
+        <!-- Breed-specific functions -->
+        <RegExpr attribute="Function" context="#stay" String="[\w-]+-(at|here|on|own)(?![-\w])"/>
+        <RegExpr attribute="Function" context="#stay" String="my(-(in|out))?-[\w-]+(?![-\w])"/>
+        <RegExpr attribute="Function" context="#stay" String="(create(-ordered)?|hatch|sprout)-[\w-]+(?![-\w])"/>
+        <RegExpr attribute="Function" context="#stay" String="is-[\w-]+\?(?![-\w])"/>
+        <RegExpr attribute="Function" context="#stay" String="create-[\w-]+-(from|to|with)(?![-\w])"/>
+        <RegExpr attribute="Function" context="#stay" String="[\w-]+-(neighbor[s?]|with)(?![-\w])"/>
+        <RegExpr attribute="Function" context="#stay" String="in-[\w-]+-(neighbor[s?]|from)(?![-\w])"/>
+        <RegExpr attribute="Function" context="#stay" String="out-[\w-]+-(neighbor[s?]|to)(?![-\w])"/>
+        <!-- End breed-specific functions -->
+        <RegExpr attribute="Variable" context="#stay" String="\w+(-\w+)*\??"/>
+        <DetectChar attribute="String" context="string" char="&quot;"/>
+        <DetectChar attribute="Comment" context="comment" char=";"/>
+        <RegExpr attribute="Operator" context="#stay" String="[+*/^&lt;&gt;=!\[\]()-]|mod"/>
+      </context>
+      <context attribute="String" lineEndContext="#pop" name="string">
+        <RegExpr attribute="Escape" String="\\[n&quot;\\]" context="#stay"/>
+        <RegExpr attribute="Error" String="\\[^n&quot;\\]" context="#stay"/>
+        <DetectChar attribute="String" context="#pop" char="&quot;"/>
+      </context>
+      <context attribute="Comment" lineEndContext="#pop" name="comment">
+        <keyword attribute="Comment Task" context="#stay" String="comment_tasks"/>
+      </context>
+    </contexts>
+    <itemDatas>
+      <itemData name="Normal Text" defStyleNum="dsNormal"/>
+      <itemData name="Function" defStyleNum="dsFunction"/>
+      <itemData name="Built-in Variable" defStyleNum="dsBuiltIn"/>
+      <itemData name="Variable" defStyleNum="dsVariable"/>
+      <itemData name="Constant" defStyleNum="dsConstant"/>
+      <itemData name="Flow Control" defStyleNum="dsKeyword"/>
+      <itemData name="Keyword" defStyleNum="dsKeyword"/>
+      <itemData name="Literal" defStyleNum="dsConstant"/>
+      <itemData name="Operator" defStyleNum="dsOperator"/>
+      <itemData name="Integer" defStyleNum="dsDecVal"/>
+      <itemData name="Float" defStyleNum="dsFloat"/>
+      <itemData name="String" defStyleNum="dsString"/>
+      <itemData name="Escape" defStyleNum="dsSpecialChar"/>
+      <itemData name="Comment" defStyleNum="dsComment"/>
+      <itemData name="Comment Task" defStyleNum="dsAlert"/>
+      <itemData name="Error" defStyleNum="dsError"/>
+    </itemDatas>
+  </highlighting>
+  <general>
+    <comments>
+      <comment name="singleLine" start=";"/>
+    </comments>
+    <keywords casesensitive="1" weakDeliminator="-?"/>
+  </general>
+</language>

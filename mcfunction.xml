@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Highlighting for Minecraft function files. -->
+<language name="MC Function" section="Scripts" extensions="*.mcfunction" version="1" kateversion="2.4">
+  <highlighting>
+    <list name="constants">
+      <item>true</item>
+      <item>false</item>
+    </list>
+    <list name="comment_tasks">
+      <item>TODO</item>
+      <item>FIXME</item>
+      <item>TEST</item>
+      <item>DEBUG</item>
+      <item>XXXX</item>
+    </list>
+    <contexts>
+      <context lineEndContext="#pop" name="line">
+        <RegExpr context="command" String="/?[a-zA-Z]" firstNonSpace="true" lookAhead="true"/>
+        <RegExpr context="macro" String="(\$)(/?[a-zA-Z]+)" firstNonSpace="true" lookAhead="true"/>
+        <RegExpr attribute="Comment" context="comment" String="#" firstNonSpace="true"/>
+        <RegExpr attribute="Error" context="#stay" String="[^ \n\r]"/>
+      </context>
+      <context lineEndContext="#pop" name="command">
+        <RegExpr attribute="Command Name" context="command_args" String="/?\w+"/>
+      </context>
+      <context lineEndContext="#pop" name="macro">
+        <StringDetect attribute="Macro Symbol" context="#stay" String="%1" dynamic="true"/>
+        <StringDetect attribute="Command Name" context="macro_args" String="%2" dynamic="true"/>
+      </context>
+      <context lineEndContext="#pop" name="command_args">
+        <LineContinue attribute="Line Continuation"/>
+        <RegExpr attribute="Float" context="#stay" String="-?\d*\.\d+"/>
+        <RegExpr attribute="Integer" context="#stay" String="-?\d+[bsfdL]?"/>
+        <RegExpr attribute="Entity Selector" context="#stay" String="@[aspre]"/>
+        <RegExpr attribute="Resource ID" context="#stay" String="[a-zA-Z][\w.-]*:[a-zA-Z][\w.-]*(/[\w.-]*)*"/>
+        <RegExpr attribute="Operator" context="#stay" String="[\[\]:,=&lt;>~^]|\.\.|[+*/%-]="/>
+        <DetectChar attribute="String" context="string" char="&quot;"/>
+        <WordDetect attribute="Keyword" String="run" insensitive="false" context="command"/>
+        <keyword attribute="Constant" context="#stay" String="constants"/>
+        <RegExpr attribute="Identifier" context="#stay" String="[a-zA-Z][\w.-]*"/>
+        <DetectChar attribute="Operator" context="braces" char="{"/>
+      </context>
+      <context lineEndContext="#pop" name="macro_args">
+        <LineContinue attribute="Line Continuation"/>
+        <RegExpr attribute="Reference" context="#stay" String="\$\([a-zA-Z\d_]+\)"/>
+        <RegExpr attribute="Float" context="#stay" String="-?\d*\.\d+"/>
+        <RegExpr attribute="Integer" context="#stay" String="-?\d+[bsfdL]?"/>
+        <RegExpr attribute="Entity Selector" context="#stay" String="@[aspre]"/>
+        <RegExpr attribute="Resource ID" context="#stay" String="[a-zA-Z][\w.-]*:[a-zA-Z][\w.-]*(/[\w.-]*)*"/>
+        <RegExpr attribute="Operator" context="#stay" String="[\[\]:,=&lt;>~^]|\.\.|[+*/%-]="/>
+        <DetectChar attribute="String" context="string" char="&quot;"/>
+        <WordDetect attribute="Keyword" String="run" insensitive="false" context="command"/>
+        <keyword attribute="Constant" context="#stay" String="constants"/>
+        <RegExpr attribute="Identifier" context="#stay" String="[a-zA-Z][\w.-]*"/>
+        <DetectChar attribute="Operator" context="braces" char="{"/>
+      </context>
+      <context lineEndContext="#pop" name="braces">
+        <RegExpr attribute="Float" context="#stay" String="-?\d*\.\d+"/>
+        <RegExpr attribute="Integer" context="#stay" String="-?\d+[bsfdL]?"/>
+        <RegExpr attribute="Entity Selector" context="#stay" String="@[aspre]"/>
+        <RegExpr attribute="Operator" context="#stay" String="[\[\]:,=&lt;>~^]|\.\.|[+*/%-]="/>
+        <DetectChar attribute="String" context="string" char="&quot;"/>
+        <WordDetect attribute="Keyword" String="run" insensitive="false" context="command"/>
+        <keyword attribute="Constant" context="#stay" String="constants"/>
+        <RegExpr attribute="Identifier" context="#stay" String="[a-zA-Z][\w.-]*"/>
+        <DetectChar attribute="Operator" context="braces" char="{"/>
+        <DetectChar attribute="Operator" context="#pop" char="}"/>
+      </context>
+      <context attribute="String" lineEndContext="#pop" name="string">
+        <RegExpr attribute="Escape" String="\\([n&quot;\\]|u[\da-fA-F]{4})" context="#stay"/>
+        <RegExpr attribute="Error" String="\\[^n&quot;\\]" context="#stay"/>
+        <DetectChar attribute="String" context="#pop" char="&quot;"/>
+      </context>
+      <context attribute="Comment" lineEndContext="#pop" name="comment">
+        <keyword attribute="Comment Task" context="#stay" String="comment_tasks"/>
+      </context>
+    </contexts>
+    <itemDatas>
+      <itemData name="Normal Text" defStyleNum="dsNormal"/>
+      <itemData name="Command Name" defStyleNum="dsFunction"/>
+      <itemData name="Macro Symbol" defStyleNum="dsOperator"/>
+      <itemData name="Reference" defStyleNum="dsSpecialChar"/>
+      <itemData name="Operator" defStyleNum="dsOperator"/>
+      <itemData name="Line Continuation" defStyleNum="dsOperator"/>
+      <itemData name="Entity Selector" defStyleNum="dsBuiltIn"/>
+      <itemData name="Resource ID" defStyleNum="dsConstant"/>
+      <itemData name="Integer" defStyleNum="dsDecVal"/>
+      <itemData name="Float" defStyleNum="dsFloat"/>
+      <itemData name="Constant" defStyleNum="dsConstant"/>
+      <itemData name="Identifier" defStyleNum="dsVariable"/>
+      <itemData name="Keyword" defStyleNum="dsKeyword"/>
+      <itemData name="String" defStyleNum="dsString"/>
+      <itemData name="Escape" defStyleNum="dsSpecialChar"/>
+      <itemData name="Comment" defStyleNum="dsComment"/>
+      <itemData name="Comment Task" defStyleNum="dsAlert"/>
+      <itemData name="Error" defStyleNum="dsError"/>
+    </itemDatas>
+  </highlighting>
+  <general>
+    <comments>
+      <comment name="singleLine" start="#"/>
+    </comments>
+    <keywords casesensitive="1"/>
+  </general>
+</language>
