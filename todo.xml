@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Highlighting for Todo files. -->
+<language name="TODO" section="Markup" extensions="*.todo" version="1" kateversion="2.4">
+  <highlighting>
+    <contexts>
+      <context attribute="Normal Text" lineEndContext="pop" name="root">
+        <RegExpr attribute="To Do" context="#stay" String="X- .*" firstNonSpace="true"/>
+        <RegExpr attribute="Doing" context="#stay" String="~- .*" firstNonSpace="true"/>
+        <RegExpr attribute="Done" context="#stay" String="V- .*" firstNonSpace="true"/>
+      </context>
+    </contexts>
+    <itemDatas>
+      <itemData name="Normal Text" defStyleNum="dsNormal"/>
+      <itemData name="To Do" defStyleNum="dsAlert"/>
+      <itemData name="Doing" defStyleNum="dsOther"/>
+      <itemData name="Done" defStyleNum="dsInformation"/>
+    </itemDatas>
+  </highlighting>
+</language>
