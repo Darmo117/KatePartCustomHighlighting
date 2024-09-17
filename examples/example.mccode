@@ -1,0 +1,106 @@
+import example_module as f;
+
+if $$ != 5 then
+  error("Usage: <corner: pos> <x length: int> <z length: int>");
+end
+
+const pos0 := pos(to_int($0), to_int($1), to_int($2));
+const x_length := to_int($3);
+const z_length := to_int($4);
+
+if x_length <= 3 or z_length <= 3 then
+  error("sides must be at least 3 blocks long");
+end
+
+function get_opposite(face)
+  return {
+    "up": "down",
+    "down": "up",
+    "east": "west",
+    "west": "east",
+    "north": "south",
+    "south": "north"
+  }[face];
+end
+
+function generate_roof_side(face)
+  const opposite := get_opposite(face);
+  # Top corner
+  var offset1 := null;
+  var offset2 := null;
+
+  if face == "north" then
+    offset1 := pos(1, 0, 0);
+    offset2 := pos(x_length - 2, 0, 0);
+  elseif face == "west" then
+    offset1 := pos(0, 0, 1);
+    offset2 := pos(0, 0, z_length - 2);
+  elseif face == "south" then
+    offset1 := pos(1, 0, z_length - 1);
+    offset2 := pos(x_length - 2, 0, z_length - 1);
+  elseif face == "east" then
+    offset1 := pos(x_length - 1, 0, 1);
+    offset2 := pos(x_length - 1, 0, z_length - 2);
+  else
+    error("invalid horizontal side " + face);
+  end
+
+  f.fill(pos0 + offset1, pos0 + offset2,
+    format_block("modid:light_gray_horizontal_quarter_block", {"position": opposite + "_bottom"}, null)
+  );
+  # Top half
+  offset1 -= pos(0, 7, 0);
+  offset2 -= pos(0, 1, 0);
+  f.fill(pos0 + offset1, pos0 + offset2, "modid:light_gray_block");
+  # Top slope
+  offset1 := pos(offset1.x, -9, offset1.z);
+  offset2 := pos(offset2.x, -8, offset2.z);
+  f.fill(pos0 + offset1, pos0 + offset2,
+    format_block("modid:light_gray_vslab", {"type": opposite}, null)
+  );
+  # Bottom slope
+  offset1 := pos(offset1.x, -13, offset1.z);
+  offset2 := pos(offset2.x, -12, offset2.z);
+  f.fill(pos0 + offset1, pos0 + offset2,
+    format_block("modid:light_gray_vslab", {"type": opposite}, null)
+  );
+  # Bottom
+  offset1 := pos(offset1.x, -15, offset1.z);
+  offset2 := pos(offset2.x, -14, offset2.z);
+  f.fill(pos0 + offset1, pos0 + offset2, "minecraft:light_gray_concrete");
+
+  var corner := {
+    "north": "south_east",
+    "west": "north_east",
+    "south": "north_west",
+    "east": "south_west"
+  }[face];
+  var p := pos0;
+  if face == "west" or face == "south" then
+    p := p.south(z_length - 1);
+  end
+  if face == "east" or face == "south" then
+    p := p.east(x_length - 1);
+  end
+  # Corner top
+  f.fill(p.down(7), p.down(1),
+    format_block("modid:light_gray_vertical_quarter_block", {"position": corner}, null)
+  );
+  # Corner bottom
+  f.fill(p.down(15), p.down(14),
+    format_block("modid:light_gray_vertical_quarter_block", {"position": corner}, null)
+  );
+end
+
+########
+# Roof #
+########
+
+# Core
+f.fill(pos0 + pos(1, -15, 1), pos0 + pos(x_length - 2, 0, z_length - 2), "modid:light_gray_block");
+
+# Sides + corners
+generate_roof_side("north");
+generate_roof_side("west");
+generate_roof_side("south");
+generate_roof_side("east");

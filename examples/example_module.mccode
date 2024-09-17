@@ -1,0 +1,32 @@
+function fill_part(pos1, pos2, block_state)
+  WORLD.execute("fill", pos1, pos2, block_state);
+end
+
+public function fill(pos1, pos2, block_state)
+  pos1 := pos(min([pos1.x, pos2.x]), min([pos1.y, pos2.y]), min([pos1.z, pos2.z]));
+  pos2 := pos(max([pos1.x, pos2.x]), max([pos1.y, pos2.y]), max([pos1.z, pos2.z]));
+  const part_size := 32;
+  const size := pos2 - pos1 + to_pos([1, 1, 1]);
+
+  var x := 0;
+  while x < size.x do
+    var y := 0;
+    while y < size.y do
+      var z := 0;
+      while z < size.z do
+        fill_part(
+          pos1 + to_pos([x, y, z]),
+          pos1 + to_pos([
+            min([x + part_size, size.x]) - 1,
+            min([y + part_size, size.y]) - 1,
+            min([z + part_size, size.z]) - 1
+          ]),
+          block_state
+        );
+        z += part_size;
+      end
+      y += part_size;
+    end
+    x += part_size;
+  end
+end
