@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Highlighting for Busy Beaver programs.
+A file consists of two lines, each containing space-separated instructions of the form (PCRE): [01][LR](\d+|H)
+The first character is the symbol to write on the tape.
+The second character is the direction to move towards after writing.
+The third part is either the number of the next state, or an "H" to halt the program.
+A sequence of any number of "-" can be used to denote an empty instruction.
+-->
+<language name="Busy Beaver Program" section="Scripts" extensions="*.busybeaver" version="1" kateversion="2.4">
+  <highlighting>
+    <contexts>
+      <context lineEndContext="#stay" name="line">
+        <RegExpr String="[ \t]+" context="#stay"/>
+        <AnyChar String="01" context="instr_dir" attribute="Symbol"/>
+        <DetectChar char="-" context="noop" attribute="Noop"/>
+        <RegExpr String="." context="#stay" attribute="Error"/>
+      </context>
+      <context lineEndContext="#pop" name="instr_dir">
+        <AnyChar String="LR" context="instr_state" attribute="Direction"/>
+        <RegExpr String="." context="#pop" attribute="Error"/>
+      </context>
+      <context lineEndContext="#pop#pop" name="instr_state">
+        <RegExpr String="\d+" context="instr_end" attribute="State"/>
+        <DetectChar char="H" context="instr_end" attribute="Halt"/>
+        <RegExpr String="." context="#pop#pop" attribute="Error"/>
+      </context>
+      <context lineEndContext="#pop" name="instr_end">
+        <RegExpr String="[ \t]" context="#pop#pop#pop" lookAhead="true"/>
+        <RegExpr String="." context="#pop#pop#pop" attribute="Error"/>
+      </context>
+      <context lineEndContext="#pop" name="noop">
+        <DetectChar char="-" context="#stay" attribute="Noop"/>
+        <RegExpr String="[ \t]" context="#pop" lookAhead="true"/>
+        <RegExpr String="." context="#pop" attribute="Error"/>
+      </context>
+    </contexts>
+    <itemDatas>
+      <itemData name="Noop" defStyleNum="dsOperator"/>
+      <itemData name="Symbol" defStyleNum="dsString"/>
+      <itemData name="Direction" defStyleNum="dsFunction"/>
+      <itemData name="State" defStyleNum="dsDecVal"/>
+      <itemData name="Halt" defStyleNum="dsKeyword"/>
+      <itemData name="Error" defStyleNum="dsError"/>
+    </itemDatas>
+  </highlighting>
+</language>
